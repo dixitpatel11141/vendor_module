@@ -1,101 +1,213 @@
-# vendor_module
- Building a Vendor Module with Node.js (B2B  Marketplace)
+# Vendor Module
 
 
-*Steps to run project:*
------------------------
-1. npm init -y
-2. npm install
-3. npm i express
-4. npm i bcrypt
-5. npm i body-parser
-6. npm i jsonwebtoken
-7. npm i mysql2
-8. npm i nodemon
-9. npm i path
-10. npm i sequel
-11. npm install express-validator
-12. Create database vendor_module
-13. npm run watch
-14. npm install dotenv
-15. npm install cors
-16. npm install multer
-17. npm install jest
-17. npm install supertest
+
+A Node.js B2B marketplace vendor management system with authentication, CRUD operations, and file upload capabilities.
 
 
-Configure below details .env file:
-# Environment variables.
-STATUS
 
-#Development port
-DEV_PORT
-PORT
-
-#Production port
-PROD_PORT
-
-#DB CONFIG
-DB_HOST
-DB_USER
-DB_PORT
-DB_NAME
-DB_PASS
-DIALECT
-
-#JWT CONFIG
-JWT_SECRET
-JWT_EXPIRES_IN
-
-# File upload directory
-UPLOAD_DIR
+## Features
 
 
-*List of enpoints:*
--------------------
-*Vendor Registration*
-Endpoint: POST /api/auth/vendor/register
-Description: Registers a new vendor.
-Authentication: Not required.
 
-*Vendor Login*
-Endpoint: POST /api/auth/vendor/login
-Description: Vendor login with email/password. Returns JWT.
-Authentication: Not required.
+- 🔐 JWT-based authentication
 
-*Get All Vendors*
-Endpoint: GET /api/vendors
-Features: Pagination + search by companyName/email
-Authentication: Required.
+- 👥 Vendor registration and management
 
-*Get Vendor by ID*
-Endpoint: GET /api/vendors/:id
-Authentication: Required.
+- 🔍 Search and pagination
 
-*Create Vendor (Admin Only)*
-Endpoint: POST /api/vendors
-Description: Creates vendor record.
-Authentication: Required.
+- 📁 Logo upload functionality
 
-*Update Vendor*
-Endpoint: PUT /api/vendors/:id
-Authentication: Required.
+- 🛡️ Admin verification system
 
-*Delete Vendor*
-Endpoint: DELETE /api/vendors/:id
-Authentication: Required.
-
-*Verify Vendor (Admin)*
-Endpoint: PATCH /api/vendors/:id/verify
-Description: Marks vendor as verified.
-Authentication: Required.
-
-*Fetch logo via*
-Endpoint: GET /api/vendors/:id/logo.
-
-Token:
-User Bearer for Authentication. Get this token from *Vendor Login* endpoint
+- ✅ Comprehensive test coverage
 
 
-*Run test cases:*
+
+## Tech Stack
+
+
+
+- **Node.js** - Runtime environment
+
+- **Express.js** - Web framework
+
+- **MySQL** - Database
+
+- **JWT** - Authentication
+
+- **Multer** - File uploads
+
+- **Jest** - Testing framework
+
+
+
+## Setup
+
+
+
+### Prerequisites
+
+- Node.js installed
+
+- MySQL database
+
+
+
+### Installation
+
+
+
+```bash
+
+npm install
+
+```
+
+
+
+### Database Setup
+
+
+
+Create a MySQL database named `vendor_module`
+
+
+
+### Environment Configuration
+
+
+
+Create a `.env` file with the following variables:
+
+
+
+```env
+
+# Environment
+
+STATUS=development
+
+
+
+# Server Ports
+
+DEV_PORT=3000
+
+PORT=3000
+
+PROD_PORT=8080
+
+
+
+# Database Configuration
+
+DB_HOST=localhost
+
+DB_USER=your_username
+
+DB_PORT=3306
+
+DB_NAME=vendor_module
+
+DB_PASS=your_password
+
+DIALECT=mysql
+
+
+
+# JWT Configuration
+
+JWT_SECRET=your_secret_key
+
+JWT_EXPIRES_IN=24h
+
+
+
+# File Upload
+
+UPLOAD_DIR=uploads/
+
+```
+
+
+
+## Development
+
+
+
+```bash
+
+npm run dev
+
+```
+
+
+
+## Testing
+
+
+
+```bash
+
 npm test
+
+```
+
+
+
+## API Endpoints
+
+
+
+### Authentication
+
+
+
+| Method | Endpoint | Description | Auth Required |
+
+|--------|----------|-------------|---------------|
+
+| POST | `/api/auth/vendor/register` | Register new vendor | ❌ |
+
+| POST | `/api/auth/vendor/login` | Vendor login (returns JWT) | ❌ |
+
+
+
+### Vendor Management
+
+
+
+| Method | Endpoint | Description | Auth Required |
+
+|--------|----------|-------------|---------------|
+
+| GET | `/api/vendors` | Get all vendors (with pagination/search) | ✅ |
+
+| GET | `/api/vendors/:id` | Get vendor by ID | ✅ |
+
+| POST | `/api/vendors` | Create vendor (Admin only) | ✅ |
+
+| PUT | `/api/vendors/:id` | Update vendor | ✅ |
+
+| DELETE | `/api/vendors/:id` | Delete vendor | ✅ |
+
+| PATCH | `/api/vendors/:id/verify` | Verify vendor (Admin only) | ✅ |
+
+| GET | `/api/vendors/:id/logo` | Fetch vendor logo | ✅ |
+
+
+
+### Authentication
+
+
+
+Use Bearer token authentication. Obtain token from the login endpoint:
+
+
+
+```
+
+Authorization: Bearer <your_jwt_token>
+
+```
